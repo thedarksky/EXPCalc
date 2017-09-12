@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/mystyle.css">
+    <title>:Thonk:</title>
+</head>
+
+<body>
+    <h1>Brave Frontier - Summoner's Arc Experience Calculator (Summoner's Training Camp)</h1>
+
+    <p>Note: All calculated values use base quest values, without any special encounters that provide additional experience.</p>
+
+    <h2>Level</h2> Starting Level:<br/>
+    <input type="number" id="startLevel" min=1 max=500 value=1>
+    <br/> 
+    Remaining EXP to Next Level (Optional):<br/>
+    <input type="text" id="remaining" size="10">
+    <br/>
+    Desired Level:<br/>
+    <input type="number" id="endLevel" min=1 max=500 value=500>
+    <br/>
+    <br/>
+
+    <select id="stage" size=4>
+        <option value="level1">Experiencing Training Lv. 1</option>
+        <option value="level2">Experiencing Training Lv. 2</option>
+        <option value="level3" selected>Experiencing Training Lv. 3</option>
+        <option value="custom">Blank</option>
+    </select>
+    <br/>
+
+    <h3>Extra Stuff (check if valid)</h3>
+
+    <div class="table">
+        <div class="row">
+            <label for="halfstp">Half STP in Lab </label>
+            <input type="checkbox" id="halfstp">
+        </div>
+        <div class="row">
+            <label for="twotimesexp">2x EXP in Lab</label>
+            <input type="checkbox" id="twotimesexp">
+        </div>
+
+        <br />
+        <b>Booster Items</b>
+
+        <div class="row">
+            <label for="onepointfive">Experience Pill / Water (1.5x EXP)</label>
+            <input type="radio" name="boosters" id="onepointfive">
+        </div>
+        <div class="row">
+            <label for="two">Experience Serum / Tonic (2x EXP)</label>
+            <input type="radio" name="boosters" id="two">
+        </div>
+        <div class="row">
+            <label for="one">None </label>
+            <input type="radio" name="boosters" id="one" checked>
+        </div>
+    </div>
+
+    <br/>
+
+    <button onclick="calcExp()">Calculate</button>
+    <br/>
+    <br/>
+
+    <textarea id="output" cols="60" , rows="13" readonly></textarea>
+
+    <br/>
+
+    <p>Created by Altivu</p>
+
+    <p>Most values retrieved from the <a href="http://bravefrontierglobal.wikia.com/wiki/Summoners%27_Training_Camp">Brave Frontier Wiki Page.</a></p>
+
+    <script src="js/myscript.js"></script>
+</body>
+
+</html>

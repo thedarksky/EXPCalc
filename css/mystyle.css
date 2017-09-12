@@ -1,0 +1,43 @@
+* {
+    max-width: 100%;
+}
+
+body {
+    background-color: lightgray;
+    font-family: "Segoe UI", "Verdana", "sans-serif";
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+input[type=text] {
+    /*background-color: lightgray;*/
+}
+
+textarea {
+    resize: none;
+}
+
+select {
+    overflow-y: auto;
+    width: 250px;
+}
+
+.table {
+    display: table;
+}
+
+.row {
+    display: table-row;
+}
+
+.row * {
+    display: table-cell;
+    text-align: right;
+    padding: 0px 10px;
+}
+
+td select {
+    width: 125px;
+}
