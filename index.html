@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/mystyle.css">
-    <title>Brave Frontier - Summoner's Arc Experience Calculator (Summoner's Training Camp)</title>
+    <title>Brave Frontier - Summoner's Arc Experience Calculator </title>
 </head>
 
 <body>
@@ -12,69 +12,677 @@
 
     <p>Note: All calculated values use base quest values, without any special encounters that provide additional experience.</p>
 
-    <h2>Level</h2> Starting Level:<br/>
-    <input type="number" id="startLevel" min=1 max=500 value=1>
-    <br/> 
-    Remaining EXP to Next Level (Optional):<br/>
-    <input type="text" id="remaining" size="10">
-    <br/>
-    Desired Level:<br/>
-    <input type="number" id="endLevel" min=1 max=500 value=500>
-    <br/>
-    <br/>
+    <hr>
 
-    <select id="stage" size=4>
-        <option value="level1">Experiencing Training Lv. 1</option>
-        <option value="level2">Experiencing Training Lv. 2</option>
-        <option value="level3" selected>Experiencing Training Lv. 3</option>
-        <option value="custom">Blank</option>
-    </select>
-    <br/>
+    <div class="initial3">
+        <div class="container">
+            <h2>Level</h2> Starting Level:
+            <br/>
+            <input type="number" id="startLevel" min=1 max=500 value=1>
+            <br/> Remaining EXP to Next Level (Optional):
+            <br/>
+            <input type="text" id="remaining" size="10">
+            <br/> Desired Level:
+            <br/>
+            <input type="number" id="endLevel" min=1 max=500 value=500>
+            <br/>
+            <br/>
 
-    <h3>Extra Stuff (check if valid)</h3>
+            <select id="stage" size=4 onchange="manual(0, 'stage')">
+                <option value="level1">Experience Training Lv. 1</option>
+                <option value="level2">Experience Training Lv. 2</option>
+                <option value="level3" selected>Experience Training Lv. 3</option>
+                <option value="custom">Custom</option>
+            </select>
+            <br/>
 
-    <div class="table">
-        <div class="row">
-            <label for="halfstp">Half STP in Lab </label>
-            <input type="checkbox" id="halfstp">
+            <div class="custom">
+                EXP per run:
+                <input type="text" size="10" class="customEXP">
+                <br> STP / EN per run:
+                <input type="text" size="5" class="customCost">
+                <select class="stpEN">
+                    <option value="STP" selected>STP</option>
+                    <option value="EN">EN</option>
+                </select>
+            </div>
+
+            <h3>Extra Stuff (check if valid)</h3>
+
+            <div class="table">
+                <div class="row">
+                    <label for="halfstp">Half STP </label>
+                    <input type="checkbox" id="halfstp">
+                </div>
+                <div class="row">
+                    <label for="twotimesexp">2x EXP</label>
+                    <input type="checkbox" id="twotimesexp">
+                </div>
+
+                <br />
+                <b>Booster Items</b>
+
+                <div class="row">
+                    <label for="onepointfive">Experience Pill / Water (1.5x EXP)</label>
+                    <input type="radio" name="boosters" id="onepointfive">
+                </div>
+                <div class="row">
+                    <label for="two">Experience Serum / Tonic (2x EXP)</label>
+                    <input type="radio" name="boosters" id="two">
+                </div>
+                <div class="row">
+                    <label for="one">None </label>
+                    <input type="radio" name="boosters" id="one" checked>
+                </div>
+            </div>
+
+            <br/>
+
+            <button onclick="calcExp()">Calculate</button>
+            <br/>
+            <br/>
+
+            <textarea id="output" cols="60" , rows="13" readonly></textarea>
+
+            <hr>
         </div>
-        <div class="row">
-            <label for="twotimesexp">2x EXP in Lab</label>
-            <input type="checkbox" id="twotimesexp">
+
+        <div class="container">
+            <h2>Elements</h2> Targeted Element:
+            <br/>
+            <select id="elements" class="horizontal" size="1" multiple>
+                <option value="fwte" selected>Fire / Water / Thunder / Earth</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+            <br /> Starting Level:
+            <br />
+            <input type="number" id="startLevel2" min=1 max=100 value=1>
+            <br/> Remaining EXP to Next Level (Optional):
+            <br/>
+            <input type="text" id="remaining2" size="10">
+            <br/> Desired Level:
+            <br/>
+            <input type="number" id="endLevel2" min=1 max=100 value=100>
+            <br/>
+            <br/>
+
+            <select id="stage2" size=4 onchange="manual(1, 'stage2')">
+                <option value="level1">Summoning Arts Training Lv. 1</option>
+                <option value="level2">Summoning Arts Training Lv. 2</option>
+                <option value="level3" selected>Summoning Arts Training Lv. 3</option>
+                <option value="custom">Custom</option>
+            </select>
+            <br/>
+
+            <div class="custom">
+                EXP per run:
+                <input type="text" size="10" class="customEXP">
+                <br> STP / EN per run:
+                <input type="text" size="5" class="customCost">
+                <select class="stpEN">
+                    <option value="STP" selected>STP</option>
+                    <option value="EN">EN</option>
+                </select>
+            </div>
+
+            <h3>Extra Stuff (check if valid)</h3>
+
+            <div class="table">
+                <div class="row">
+                    <label for="halfstp2">Half STP </label>
+                    <input type="checkbox" id="halfstp2">
+                </div>
+                <div class="row">
+                    <label for="twotimesexp2">2x EXP</label>
+                    <input type="checkbox" id="twotimesexp2">
+                </div>
+
+                <br />
+                <b>Booster Items</b>
+
+                <div class="row">
+                    <label for="onepointfive2">Experience Pill / Water (1.5x EXP)</label>
+                    <input type="radio" name="boosters2" id="onepointfive2">
+                </div>
+                <div class="row">
+                    <label for="two2">Experience Serum / Tonic (2x EXP)</label>
+                    <input type="radio" name="boosters2" id="two2">
+                </div>
+                <div class="row">
+                    <label for="one2">None </label>
+                    <input type="radio" name="boosters2" id="one2" checked>
+                </div>
+            </div>
+
+            <br/>
+
+            <button onclick="calcEle()">Calculate</button>
+            <br/>
+            <br/>
+
+            <textarea id="output2" cols="60" , rows="13" readonly></textarea>
+
+            <hr>
         </div>
 
-        <br />
-        <b>Booster Items</b>
+        <div class="container">
+            <h2>Weapons</h2>
+            <p>Note: There is a different experience curve for the bronze weapons; for simplicity's sake, this will be omitted, under the assumption that all desired level weaponing will use the standard experience curve.</p>
+            Starting Level:
+            <br/>
+            <input type="number" id="startLevel3" min=1 max=100 value=1>
+            <br/> Remaining EXP to Next Level (Optional):
+            <br/>
+            <input type="text" id="remaining3" size="10">
+            <br/> Desired Level:
+            <br/>
+            <input type="number" id="endLevel3" min=1 max=100 value=100>
+            <br/>
+            <br/>
 
-        <div class="row">
-            <label for="onepointfive">Experience Pill / Water (1.5x EXP)</label>
-            <input type="radio" name="boosters" id="onepointfive">
-        </div>
-        <div class="row">
-            <label for="two">Experience Serum / Tonic (2x EXP)</label>
-            <input type="radio" name="boosters" id="two">
-        </div>
-        <div class="row">
-            <label for="one">None </label>
-            <input type="radio" name="boosters" id="one" checked>
+            <select id="stage3" size=4 onchange="manual(2, 'stage3')">
+                <option value="level1">Weapon Arts Training Lv. 1</option>
+                <option value="level2">Weapon Arts Training Lv. 2</option>
+                <option value="level3" selected>Weapon Arts Training Lv. 3</option>
+                <option value="custom">Custom</option>
+            </select>
+            <br/>
+
+            <div class="custom">
+                EXP per run:
+                <input type="text" size="10" class="customEXP">
+                <br> STP / EN per run:
+                <input type="text" size="5" class="customCost">
+                <select class="stpEN">
+                    <option value="STP" selected>STP</option>
+                    <option value="EN">EN</option>
+                </select>
+            </div>
+
+            <h3>Extra Stuff (check if valid)</h3>
+
+            <div class="table">
+                <div class="row">
+                    <label for="halfstp3">Half STP </label>
+                    <input type="checkbox" id="halfstp3">
+                </div>
+                <div class="row">
+                    <label for="twotimesexp3">2x EXP</label>
+                    <input type="checkbox" id="twotimesexp3">
+                </div>
+
+                <br />
+                <b>Booster Items</b>
+
+                <div class="row">
+                    <label for="onepointfive3">Experience Pill / Water (1.5x EXP)</label>
+                    <input type="radio" name="boosters3" id="onepointfive3">
+                </div>
+                <div class="row">
+                    <label for="two3">Experience Serum / Tonic (2x EXP)</label>
+                    <input type="radio" name="boosters3" id="two3">
+                </div>
+                <div class="row">
+                    <label for="one3">None </label>
+                    <input type="radio" name="boosters3" id="one3" checked>
+                </div>
+            </div>
+
+            <br/>
+
+            <button onclick="calcWep()">Calculate</button>
+            <br/>
+            <br/>
+
+            <textarea id="output3" cols="60" , rows="13" readonly></textarea>
+
+            <hr>
         </div>
     </div>
 
-    <br/>
+    <div class="outlier">
+        <hr>
+        <h2>SP</h2>
 
-    <button onclick="calcExp()">Calculate</button>
-    <br/>
-    <br/>
+        <table id="table">
+            <tr>
+                <th>Parameter</th>
+                <th>Starting Level</th>
+                <th>Desired Level</th>
+                <th>SP Required</th>
+            </tr>
+            <tr onchange="calcSP(1, 'stats')">
+                <td>Max HP</td>
+                <td>
+                    <select id="maxHP_a">
+                        <option value="1">1 (1% boost)</option>
+                        <option value="2">2 (3% boost)</option>
+                        <option value="3">3 (5% boost)</option>
+                        <option value="4">4 (7% boost)</option>
+                        <option value="5">5 (10% boost)</option>
+                        <option value="6">6 (12% boost)</option>
+                        <option value="7">7 (14% boost)</option>
+                        <option value="8">8 (16% boost)</option>
+                        <option value="9">9 (18% boost)</option>
+                        <option value="10">10 (20% boost)</option>
+                        <option value="11">11 (22% boost)</option>
+                        <option value="12">12 (24% boost)</option>
+                        <option value="13">13 (26% boost)</option>
+                        <option value="14">14 (28% boost)</option>
+                        <option value="15">15 (30% boost)</option>
+                        <option value="16">16 (32% boost)</option>
+                        <option value="17">17 (34% boost)</option>
+                        <option value="18">18 (36% boost)</option>
+                        <option value="19">19 (38% boost)</option>
+                        <option value="20">20 (40% boost)</option>
+                        <option value="21">21 (42% boost)</option>
+                        <option value="22">22 (44% boost)</option>
+                        <option value="23">23 (46% boost)</option>
+                        <option value="24">24 (48% boost)</option>
+                        <option value="25">25 (50% boost)</option>
+                        <option value="26">26 (52% boost)</option>
+                        <option value="27">27 (54% boost)</option>
+                        <option value="28">28 (56% boost)</option>
+                        <option value="29">29 (58% boost)</option>
+                        <option value="30">30 (60% boost)</option>
+                        <!--<option value="31">31 (62% boost)</option>
+                        <option value="32">32 (64% boost)</option>
+                        <option value="33">33 (66% boost)</option>
+                        <option value="34">34 (68% boost)</option>
+                        <option value="35">35 (70% boost)</option>
+                        <option value="36">36 (72% boost)</option>
+                        <option value="37">37 (74% boost)</option>
+                        <option value="38">38 (76% boost)</option>
+                        <option value="39">39 (78% boost)</option>
+                        <option value="40">40 (80% boost)</option>
+                        <option value="41">41 (82% boost)</option>
+                        <option value="42">42 (84% boost)</option>
+                        <option value="43">43 (86% boost)</option>
+                        <option value="44">44 (88% boost)</option>
+                        <option value="45">45 (90% boost)</option>
+                        <option value="46">46 (92% boost)</option>
+                        <option value="47">47 (94% boost)</option>
+                        <option value="48">48 (96% boost)</option>
+                        <option value="49">49 (98% boost)</option>
+                        <option value="50">50 (100% boost)</option> -->
+                    </select>
+                </td>
+                <td>
+                    <select id="maxHP_b">
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="maxHP_c" value=0 readonly>
+                </td>
+            </tr>
+            <tr onchange="calcSP(2, 'stats')">
+                <td>Attack</td>
+                <td>
+                    <select id="attack_a">
+                    </select>
+                </td>
+                <td>
+                    <select id="attack_b">
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="attack_c" value=0 readonly>
+                </td>
+            </tr>
+            <tr onchange="calcSP(3, 'relative')">
+                <td>Atk boost relative to high HP</td>
+                <td>
+                    <select id="atkRel_a">
+                        <option value="1">1 (Inactive)</option>
+                        <option value="2">2 (Active)</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="atkRel_b">
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="atkRel_c" value=0 readonly>
+                </td>
+            </tr>
+            <tr onchange="calcSP(4, 'limitBreak')">
+                <td>Atk Parameter Limit Break</td>
+                <td>
+                    <select id="atkCap_a">
+                        <option value="1">1 (Inactive)</option>
+                        <option value="2">2 (Raise to 130,000)</option>
+                        <!--<option value="3">3 (Raise to 150,000)</option>!-->
+                    </select>
+                </td>
+                <td>
+                    <select id="atkCap_b">
+                        <option value="1">1 (Inactive)</option>
+                        <option value="2">2 (Raise to 130,000)</option>
+                        <!--<option value="3">3 (Raise to 150,000)</option>!-->
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="atkCap_c" value=0 readonly>
+                </td>
+            </tr>
+            <tr onchange="calcSP(5, 'stats')">
+                <td>Defense</td>
+                <td>
+                    <select id="defense_a">
+                    </select>
+                </td>
+                <td>
+                    <select id="defense_b">
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="defense_c" value=0 readonly>
+                </td>
+            </tr>
+            <tr onchange="calcSP(6, 'relative')">
+                <td>Def boost relative to low HP</td>
+                <td>
+                    <select id="defRel_a">
+                        <option value="1">1 (Inactive)</option>
+                        <option value="2">2 (Active)</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="defRel_b">
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="defRel_c" value=0 readonly>
+                </td>
+            </tr>
+            <tr onchange="calcSP(7, 'stats')">
+                <td>Recovery</td>
+                <td>
+                    <select id="rec_a">
+                    </select>
+                </td>
+                <td>
+                    <select id="rec_b">
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="rec_c" value=0 readonly>
+                </td>
+            </tr>
+            <tr onchange="calcSP(8, 'efficacy')">
+                <td>HC Efficacy</td>
+                <td>
+                    <select id="hcEff_a">
+                        <option value="1">1 (0% boost)</option>
+                        <option value="2">2 (3% boost)</option>
+                        <option value="3">3 (6% boost)</option>
+                        <option value="4">4 (9% boost)</option>
+                        <option value="5">5 (15% boost)</option>
+                        <option value="6">6 (18% boost)</option>
+                        <option value="7">7 (21% boost)</option>
+                        <option value="8">8 (24% boost)</option>
+                        <option value="9">9 (27% boost)</option>
+                        <option value="10">10 (30% boost)</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="hcEff_b">
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="hcEff_c" value=0 readonly>
+                </td>
+            </tr>
+            <tr onchange="calcSP(9, 'stats')">
+                <td>Spark Damage</td>
+                <td>
+                    <select id="spark_a">
+                    </select>
+                </td>
+                <td>
+                    <select id="spark_b">
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="spark_c" value=0 readonly>
+                </td>
+            </tr>
+            <tr onchange="calcSP(10, 'sparkCrits')">
+                <td>Spark Critical</td>
+                <td>
+                    <select id="sparkCrits_a">
+                        <option value="1">1 (0% boost)</option>
+                        <option value="2">2 (2% boost)</option>
+                        <option value="3">3 (4% boost)</option>
+                        <option value="4">4 (6% boost)</option>
+                        <option value="5">5 (10% boost)</option>
+                        <option value="6">6 (11% boost)</option>
+                        <option value="7">7 (12% boost)</option>
+                        <option value="8">8 (13% boost)</option>
+                        <option value="9">9 (14% boost)</option>
+                        <option value="10">10 (15% boost)</option>
+                        <option value="11">11 (16% boost)</option>
+                        <option value="12">12 (17% boost)</option>
+                        <option value="13">13 (18% boost)</option>
+                        <option value="14">14 (19% boost)</option>
+                        <option value="15">15 (20% boost)</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="sparkCrits_b">
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="sparkCrits_c" value=0 readonly>
+                </td>
+            </tr>
+            <tr onchange="calcSP(11, 'BB')">
+                <td>BB Atk</td>
+                <td>
+                    <select id="BB_a">
+                        <option value="1">1 (10% boost)</option>
+                        <option value="2">2 (20% boost)</option>
+                        <option value="3">3 (30% boost)</option>
+                        <option value="4">4 (40% boost)</option>
+                        <option value="5">5 (50% boost)</option>
+                        <option value="6">6 (60% boost)</option>
+                        <option value="7">7 (70% boost)</option>
+                        <option value="8">8 (80% boost)</option>
+                        <option value="9">9 (90% boost)</option>
+                        <option value="10">10 (100% boost)</option>
+                        <option value="11">11 (110% boost)</option>
+                        <option value="12">12 (120% boost)</option>
+                        <option value="13">13 (130% boost)</option>
+                        <option value="14">14 (140% boost)</option>
+                        <option value="15">15 (150% boost)</option>
+                        <option value="16">16 (160% boost)</option>
+                        <option value="17">17 (170% boost)</option>
+                        <option value="18">18 (180% boost)</option>
+                        <option value="19">19 (190% boost)</option>
+                        <option value="20">20 (200% boost)</option>
+                        <!--<option value="21">21 (210% boost)</option>
+                        <option value="22">22 (220% boost)</option>
+                        <option value="23">23 (230% boost)</option>
+                        <option value="24">24 (240% boost)</option>
+                        <option value="25">25 (250% boost)</option>
+                        <option value="26">26 (260% boost)</option>
+                        <option value="27">27 (270% boost)</option>
+                        <option value="28">28 (280% boost)</option>
+                        <option value="29">29 (290% boost)</option>
+                        <option value="30">30 (300% boost)</option>!-->
+                    </select>
+                </td>
+                <td>
+                    <select id="BB_b">
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="BB_c" value=0 readonly>
+                </td>
+            </tr>
+            <tr onchange="calcSP(12, 'BB')">
+                <td>SBB Atk</td>
+                <td>
+                    <select id="SBB_a">
+                    </select>
+                </td>
+                <td>
+                    <select id="SBB_b">
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="SBB_c" value=0 readonly>
+                </td>
+            </tr>
+            <tr onchange="calcSP(13, 'BCHC')">
+                <td>BC & HC Drop Rate</td>
+                <td>
+                    <select id="BCHC_a">
+                        <option value="1">1 (1% boost)</option>
+                        <option value="2">2 (2% boost)</option>
+                        <option value="3">3 (3% boost)</option>
+                        <option value="4">4 (4% boost)</option>
+                        <option value="5">5 (5% boost)</option>
+                        <option value="6">6 (6% boost)</option>
+                        <option value="7">7 (7% boost)</option>
+                        <option value="8">8 (8% boost)</option>
+                        <option value="9">9 (9% boost)</option>
+                        <option value="10">10 (10% boost)</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="BCHC_b">
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="BCHC_c" value=0 readonly>
+                </td>
+            </tr>
+            <tr onchange="calcSP(14, 'consumption')">
+                <td>Less BB Consumption</td>
+                <td>
+                    <select id="consumption_a">
+                        <option value="1">1 (2% reduction)</option>
+                        <option value="2">2 (4% reduction)</option>
+                        <option value="3">3 (6% reduction)</option>
+                        <option value="4">4 (8% reduction)</option>
+                        <option value="5">5 (10% reduction)</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="consumption_b">
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="consumption_c" value=0 readonly>
+                </td>
+            </tr>
+            <tr onchange="calcSP(15, 'efficacy')">
+                <td>BC Efficacy</td>
+                <td>
+                    <select id="bcEff_a">
+                    </select>
+                </td>
+                <td>
+                    <select id="bcEff_b">
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="bcEff_c" value=0 readonly>
+                </td>
+            </tr>
+            <tr onchange="calcSP(16, 'SAR')">
+                <td>Status Ailment Resistance</td>
+                <td>
+                    <select id="SAR_a">
+                        <option value="1">1 (10% resistance)</option>
+                        <option value="2">2 (20% resistance)</option>
+                        <option value="3">3 (30% resistance)</option>
+                        <option value="4">4 (40% resistance)</option>
+                        <option value="5">5 (50% resistance)</option>
+                        <option value="6">6 (60% resistance)</option>
+                        <option value="7">7 (70% resistance)</option>
+                        <option value="8">8 (80% resistance)</option>
+                        <option value="9">9 (90% resistance)</option>
+                        <option value="10">10 (Immunity)</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="SAR_b">
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="SAR_c" value=0 readonly>
+                </td>
+            </tr>
+        </table>
+        <br/>
 
-    <textarea id="output" cols="60" , rows="13" readonly></textarea>
+        <select id="stage4" size=4 onchange="manual(3, 'stage4')">
+            <option value="level1">SP Training Lv. 1</option>
+            <option value="level2">SP Training Lv. 2</option>
+            <option value="level3" selected>SP Training Lv. 3</option>
+            <option value="custom">Custom</option>
+        </select>
+        <br/>
 
-    <br/>
+        <div class="custom">
+            EXP per run:
+            <input type="text" size="10" class="customEXP">
+            <br> STP / EN per run:
+            <input type="text" size="5" class="customCost">
+            <select class="stpEN">
+                <option value="STP" selected>STP</option>
+                <option value="EN">EN</option>
+            </select>
+        </div>
 
-    <p>Created by Altivu</p>
+        <h3>Extra Stuff (check if valid)</h3>
 
-    <p>Most values retrieved from the <a href="http://bravefrontierglobal.wikia.com/wiki/Summoners%27_Training_Camp">Brave Frontier Wiki Page.</a></p>
+        <div class="table">
+            <div class="row">
+                <label for="halfstp4">Half STP </label>
+                <input type="checkbox" id="halfstp4">
+            </div>
+            <div class="row">
+                <label for="twotimesexp4">2x EXP</label>
+                <input type="checkbox" id="twotimesexp4">
+            </div>
 
-    <script src="js/myscript.js"></script>
+            <br />
+            <b>Booster Items</b>
+
+            <div class="row">
+                <label for="onepointfive4">Experience Pill / Water (1.5x EXP)</label>
+                <input type="radio" name="boosters4" id="onepointfive4">
+            </div>
+        </div>
+        <div class="row">
+            <label for="two4">Experience Serum / Tonic (2x EXP)</label>
+            <input type="radio" name="boosters4" id="two4">
+        </div>
+        <div class="row">
+            <label for="one4">None </label>
+            <input type="radio" name="boosters4" id="one4" checked>
+        </div>
+
+        <br/>
+
+        <button onclick="calcSP(16, 'SAR')">Calculate</button>
+        <br/>
+        <br/>
+
+        <textarea id="output4" cols="60" , rows="13" readonly></textarea>
+
+        <hr>
+
+        <p>Created by Altivu</p>
+
+        <p>Most values retrieved from the <a href="http://bravefrontierglobal.wikia.com/wiki/Summoners%27_Training_Camp">Brave Frontier Wiki Page.</a></p>
+    </div>
+
+    <script src="js/js_sp.js"></script>
 </body>
 
 </html>
