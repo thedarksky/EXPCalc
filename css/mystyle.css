@@ -6,38 +6,73 @@ body {
     background-color: lightgray;
     font-family: "Segoe UI", "Verdana", "sans-serif";
 }
-
-table, th, td {
+table,
+th,
+td {
     border: 1px solid black;
 }
-
 input[type=text] {
     /*background-color: lightgray;*/
 }
-
 textarea {
     resize: none;
 }
-
 select {
     overflow-y: auto;
     width: 250px;
 }
-
 .table {
     display: table;
 }
-
 .row {
     display: table-row;
 }
-
 .row * {
     display: table-cell;
     text-align: right;
     padding: 0px 10px;
 }
-
 td select {
-    width: 125px;
+    width: 150px;
+}
+td input {
+    width: 100px;
+}
+
+.horizontal {
+    width: 268px;
+}
+
+.horizontal option {
+    display: inline-block;
+    border: solid;
+    padding: 3px;
+}
+
+.container {
+    max-width: 33.33%;
+    padding: 5px;
+    float: left;
+    flex: 1;
+}
+
+.outlier {
+    width: 100%;
+    float:left;
+}
+
+.stpEN {
+    width: 50px;
+}
+
+.custom {
+    visibility: hidden;
+}
+
+
+@media screen and (max-width: 1500px) {
+    .container {
+        max-width: 100%;
+        float: none;
+    }
 }
