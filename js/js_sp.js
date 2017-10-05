@@ -85,7 +85,7 @@ function errCheck(start, end, remaining, max, arr) {
     if (end - start < 0) {
         return "Starting level must be lower than desired level!";
     } else if (start < 1 || start > max || end < 1 || end > max) {
-        return "Level must be between 1 and 500!";
+        return "Level must be between 1 and " + max + "!";
     } else if (isNaN(start) || isNaN(end) || start % 1 != 0 || end % 1 != 0) {
         return "Level must be an integer!";
     } else if (remaining != "" && (isNaN(remaining) || remaining % 1 != 0)) {
