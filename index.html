@@ -38,9 +38,9 @@
 
             <div class="custom">
                 EXP per run:
-                <input type="text" size="10" class="customEXP" value = 19200>
+                <input type="text" size="10" class="customEXP" value=1 9200>
                 <br> STP / EN per run:
-                <input type="text" size="5" class="customCost" value = 1000>
+                <input type="text" size="5" class="customCost" value=1 000>
                 <select class="stpEN">
                     <option value="STP" selected>STP</option>
                     <option value="EN">EN</option>
@@ -286,7 +286,7 @@
                         <option value="28">28 (56% boost)</option>
                         <option value="29">29 (58% boost)</option>
                         <option value="30">30 (60% boost)</option>
-                        <!--<option value="31">31 (62% boost)</option>
+                        <option value="31">31 (62% boost)</option>
                         <option value="32">32 (64% boost)</option>
                         <option value="33">33 (66% boost)</option>
                         <option value="34">34 (68% boost)</option>
@@ -305,7 +305,7 @@
                         <option value="47">47 (94% boost)</option>
                         <option value="48">48 (96% boost)</option>
                         <option value="49">49 (98% boost)</option>
-                        <option value="50">50 (100% boost)</option> -->
+                        <option value="50">50 (100% boost)</option>
                     </select>
                 </td>
                 <td>
@@ -352,14 +352,14 @@
                     <select id="atkCap_a">
                         <option value="1">1 (Inactive)</option>
                         <option value="2">2 (Raise to 130,000)</option>
-                        <!--<option value="3">3 (Raise to 150,000)</option>!-->
+                        <option value="3">3 (Raise to 150,000)</option>
                     </select>
                 </td>
                 <td>
                     <select id="atkCap_b">
                         <option value="1">1 (Inactive)</option>
                         <option value="2">2 (Raise to 130,000)</option>
-                        <!--<option value="3">3 (Raise to 150,000)</option>!-->
+                        <option value="3">3 (Raise to 150,000)</option>
                     </select>
                 </td>
                 <td>
@@ -501,7 +501,7 @@
                         <option value="18">18 (180% boost)</option>
                         <option value="19">19 (190% boost)</option>
                         <option value="20">20 (200% boost)</option>
-                        <!--<option value="21">21 (210% boost)</option>
+                        <option value="21">21 (210% boost)</option>
                         <option value="22">22 (220% boost)</option>
                         <option value="23">23 (230% boost)</option>
                         <option value="24">24 (240% boost)</option>
@@ -510,7 +510,7 @@
                         <option value="27">27 (270% boost)</option>
                         <option value="28">28 (280% boost)</option>
                         <option value="29">29 (290% boost)</option>
-                        <option value="30">30 (300% boost)</option>!-->
+                        <option value="30">30 (300% boost)</option>
                     </select>
                 </td>
                 <td>
@@ -616,6 +616,36 @@
                     <input type="text" id="SAR_c" value=0 readonly>
                 </td>
             </tr>
+            <tr onchange="calcSP(17, 'AI')">
+                <td>Resist KO (Angel Idol)</td>
+                <td>
+                    <select id="AI_a">
+                        <option value="1">1 (Inactive)</option>
+                        <option value="2">2 (Active)</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="AI_b">
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="AI_c" value=0 readonly>
+                </td>
+            </tr>
+            <tr onchange="calcSP(18, 'efficacy')">
+                <td>OD Efficacy</td>
+                <td>
+                    <select id="odEff_a">
+                    </select>
+                </td>
+                <td>
+                    <select id="odEff_b">
+                    </select>
+                </td>
+                <td>
+                    <input type="text" id="odEff_c" value=0 readonly>
+                </td>
+            </tr>
         </table>
         <br/>
 
@@ -629,9 +659,9 @@
 
         <div class="custom">
             EXP per run:
-            <input type="text" size="10" class="customEXP" value = 220>
+            <input type="text" size="10" class="customEXP" value=2 20>
             <br> STP / EN per run:
-            <input type="text" size="5" class="customCost" value = 1000>
+            <input type="text" size="5" class="customCost" value=1 000>
             <select class="stpEN">
                 <option value="STP" selected>STP</option>
                 <option value="EN">EN</option>
