@@ -15,6 +15,8 @@ var eleValues_dark = [0, 40, 59, 88, 126, 174, 232, 299, 376, 462, 558, 664, 779
 
 var wepValues = [0, 100, 580, 1220, 2020, 2980, 4100, 5380, 6820, 8420, 10180, 12100, 14180, 16420, 18820, 21380, 24100, 26980, 30020, 33220, 50460, 34080, 34540, 35020, 35520, 36040, 36580, 37140, 37720, 57480, 38940, 39580, 40240, 40920, 62430, 42340, 43080, 43840, 44620, 68130, 45830, 46250, 46680, 47120, 71355, 48030, 48500, 48980, 49470, 74955, 50480, 51000, 51530, 52070, 78930, 53180, 53750, 54330, 54920, 83280, 55825, 56135, 56450, 56770, 85642, 57425, 57760, 58100, 58445, 58795, 59150, 59510, 59875, 60245, 90930, 61000, 61385, 61775, 62170, 93855, 62975, 63385, 63800, 64220, 64645, 65075, 65510, 65950, 66395, 66845, 67300, 67760, 68225, 68695, 69170, 69650, 70135, 70625, 71120, 71620];
 
+// SP Options
+
 var stats = [0, 10, 40, 80, 130, 190, 260, 340, 430, 530, 640, 760, 890, 1030, 1180, 1340, 1510, 1690, 1880, 2080, 2290, 2510, 2740, 2980, 3230, 3490, 3760, 4040, 4330, 4630, 4940, 5260, 5590, 5930, 6280, 6640, 7010, 7390, 7780, 8180, 8590, 9010, 9440, 9880, 10330, 10790, 11260, 11740, 12230, 12730];
 
 var limitBreak = [0, 50000, 50000];
@@ -33,6 +35,8 @@ var consumption = [0, 240, 880, 1920, 3120];
 
 var SAR = [0, 160, 640, 1280, 2080, 2880, 3680, 4480, 5280, 6080];
 
+var AI = [0, 90000];
+
 var statsSP = document.getElementById("maxHP_a");
 var relativeSP = document.getElementById("atkRel_a");
 var efficacySP = document.getElementById("hcEff_a");
@@ -41,6 +45,7 @@ var BBSP = document.getElementById("BB_a");
 var BCHCSP = document.getElementById("BCHC_a");
 var consumptionSP = document.getElementById("consumption_a");
 var SARSP = document.getElementById("SAR_a");
+var AISP = document.getElementById("AI_a");
 
 // Populate SP selects with existing HTML onload (saves on lines)
 
@@ -76,6 +81,11 @@ document.getElementById("BCHC_b").innerHTML = BCHCSP.innerHTML;
 document.getElementById("consumption_b").innerHTML = consumptionSP.innerHTML;
 
 document.getElementById("SAR_b").innerHTML = SARSP.innerHTML;
+
+document.getElementById("AI_b").innerHTML = AISP.innerHTML;
+
+document.getElementById("odEff_a").innerHTML = efficacySP.innerHTML;
+document.getElementById("odEff_b").innerHTML = efficacySP.innerHTML;
 
 //////////
 
