@@ -198,8 +198,6 @@ function calcExp() {
 
         if (document.getElementById("twotimesexp").checked) {
             expSelect *= 2;
-            res_wep *= 2;
-            res_sp *= 2;
             expExText += "(2x EXP lab active) ";
         }
 
@@ -329,10 +327,6 @@ function calcEle() {
         result.value += "\nAmount of EXP acquired per run: ";
 
         if (document.getElementById("twotimesexp2").checked) {
-            //expSelect *= 2;
-            res_exp *= 2;
-            res_wep *= 2;
-            res_sp *= 2;
             expExText += "(2x EXP lab active) ";
         }
 
@@ -449,8 +443,6 @@ function calcWep() {
 
         if (document.getElementById("twotimesexp3").checked) {
             expSelect *= 2;
-            res_exp *= 2;
-            res_sp *= 2;
             expExText += "(2x EXP lab active) ";
         }
 
@@ -564,8 +556,6 @@ function calcSP(row, type) {
 
         if (document.getElementById("twotimesexp4").checked) {
             expSelect *= 2;
-            res_wep *= 2;
-            res_exp *= 2;
             expExText += "(2x EXP lab active) ";
         }
         if (document.getElementById("onepointfive4").checked) {
