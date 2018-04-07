@@ -91,7 +91,7 @@ document.getElementById("odEff_b").innerHTML = efficacySP.innerHTML;
 
 // Initial Error Checking Function for Proper Input
 
-function errCheck(start, end, remaining, max, arr, nEllie) {
+function errCheck(start, end, remaining, max, arr, nEllie, guildExp) {
     if (end - start < 0) {
         return "Starting level must be lower than desired level!";
     } else if (start < 1 || start > max || end < 1 || end > max) {
