@@ -1,4 +1,5 @@
 /*Code by Altivu
+  Guild Exp and Ellie code added by /u/TheDarkSky
  */
 
 // Global variables to be used for multiple functions
@@ -91,7 +92,7 @@ document.getElementById("odEff_b").innerHTML = efficacySP.innerHTML;
 
 // Initial Error Checking Function for Proper Input
 
-function errCheck(start, end, remaining, max, arr) {
+function errCheck(start, end, remaining, max, arr, nEllie) {
     if (end - start < 0) {
         return "Starting level must be lower than desired level!";
     } else if (start < 1 || start > max || end < 1 || end > max) {
@@ -102,6 +103,10 @@ function errCheck(start, end, remaining, max, arr) {
         return "Remaining EXP must be blank or an integer!";
     } else if (remaining > arr[start] || remaining < 0) {
         return "Remaining EXP value not valid relative to starting level!"
+    } else if (nEllie > 4 || nEllie < 0) {
+        return "Cannot have less than 0 Ellies or more than 4 (without removing the summoner)!"
+    } else if (guildExp > 20 || guildExp < 0) {
+        return "Guild Exp value inputted must be between 0 and 20!"
     } else {
         return "";
     }
@@ -126,6 +131,8 @@ function calcExp() {
     var end = Number(document.getElementById("endLevel").value);
     var remaining = Number(document.getElementById("remaining").value);
     var stage = document.getElementById("stage");
+    var nEllie = Number(document.getElementById("nEllie").value);
+    var guildExp = Number(document.getElementById("guildExp").value); // THIS WILL NOT BE A DECIMAL unless the html file is changed
 
     var stpSelect = "";
     var expSelect = "";
@@ -153,7 +160,7 @@ function calcExp() {
 
     // Initial error checking for bad inputs
 
-    result.value = errCheck(start, end, remaining, 500, expValues);
+    result.value = errCheck(start, end, remaining, 500, expValues, nEllie, guildExp);
 
     if (result.value != "") {
         return;
@@ -210,7 +217,18 @@ function calcExp() {
             expSelect *= 2;
             res_wep *= 2;
             res_sp *= 2;
-            expExText += "(2x EXP booster active)";
+            expExText += "(2x EXP booster active) ";
+        }
+        
+        if (nEllie != 0){
+            ellieValue = (0.05 * nEllie) + 1; // 2 Ellies * 5% = 10% = 0.1 | 0.1 + 1 = 1.1 
+            expSelect *= ellieValue;
+            expExText += "(" + nEllie + " Ellie" + (nEllie > 1 ? "s" : "") + " = +" + (5 * nEllie) + "% Summoner EXP) ";
+        }
+        if (guildExp != 0){
+            guildExpValue = (0.01 * guildExp) + 1; // SAme as ellie; conversion to decimal to directly multiply with expSelect 
+            expSelect *= guildExpValue;
+            expExText += "(+" + guildExp + "% Guild Summoner EXP bonus) ";
         }
 
         result.value += numberWithCommas(expSelect) + "\n" + expExText;
