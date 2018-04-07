@@ -105,7 +105,7 @@ function errCheck(start, end, remaining, max, arr, nEllie, guildExp) {
     } else if (nEllie > 4 || nEllie < 0) {
         return "Cannot have less than 0 Ellies or more than 4 (without removing the summoner)!"
     } else if (guildExp > 20 || guildExp < 0) {
-        return "Guild Exp value inputted must be between 0 and 20!"
+        return "Guild Exp value inputted must be between 0 and 40!"
     } else {
         return "";
     }
