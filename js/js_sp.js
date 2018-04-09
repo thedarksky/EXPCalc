@@ -1,4 +1,4 @@
-/*Code by Altivu
+/*Code by Altivu 
  */
 
 // Global variables to be used for multiple functions
