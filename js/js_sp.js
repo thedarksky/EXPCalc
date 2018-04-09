@@ -231,7 +231,7 @@ function calcExp() {
             expExText += "(+" + guildExp + "% Guild Summoner EXP bonus) ";
         }
 
-        result.value += numberWithCommas(expSelect) + "\n" + expExText;
+        result.value += numberWithCommas(Math.floor(expSelect)) + "\n" + expExText;
 
         var runs = Math.ceil(total / expSelect);
         var req = runs * stpSelect;
