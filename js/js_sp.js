@@ -104,8 +104,8 @@ function errCheck(start, end, remaining, max, arr, nEllie, guildExp) {
         return "Remaining EXP value not valid relative to starting level!"
     } else if (nEllie > 4 || nEllie < 0) {
         return "Cannot have less than 0 Ellies or more than 4 (without removing the summoner)!"
-    } else if (guildExp > 40 || guildExp < 0) {
-        return "Guild Exp value inputted must be between 0 and 40!"
+    } else if (guildExp > 50 || guildExp < 0) {
+        return "Guild EXP bonus % must be between 0 and 50!"
     } else {
         return "";
     }
@@ -219,13 +219,13 @@ function calcExp() {
             res_sp *= 2;
             expExText += "(2x EXP booster active) ";
         }
-        
-        if (nEllie != 0){
+
+        if (nEllie != 0) {
             ellieValue = (0.05 * nEllie) + 1; // 2 Ellies * 5% = 10% = 0.1 | 0.1 + 1 = 1.1 
             expSelect *= ellieValue;
             expExText += "(" + nEllie + " Ellie" + (nEllie > 1 ? "s" : "") + " = +" + (5 * nEllie) + "% Summoner EXP) ";
         }
-        if (guildExp != 0){
+        if (guildExp != 0) {
             guildExpValue = (0.01 * guildExp) + 1; // conversion to decimal to directly multiply with expSelect 
             expSelect *= guildExpValue;
             expExText += "(+" + guildExp + "% Guild Summoner EXP bonus) ";
@@ -606,6 +606,51 @@ function calcSP(row, type) {
     } catch (err) {
         result.value = err.message;
     }
+}
+
+//World's most inefficient code
+function calcSPAll() {
+    calcSP(1, 'stats');
+    calcSP(2, 'stats');
+    calcSP(3, 'relative');
+    calcSP(4, 'limitBreak');
+    calcSP(5, 'stats');
+    calcSP(6, 'relative');
+    calcSP(7, 'stats');
+    calcSP(8, 'efficacy');
+    calcSP(9, 'stats');
+    calcSP(10, 'sparkCrits');
+    calcSP(11, 'BB');
+    calcSP(12, 'BB');
+    calcSP(13, 'BCHC');
+    calcSP(14, 'consumption');
+    calcSP(15, 'efficacy');
+    calcSP(16, 'SAR');
+    calcSP(17, 'AI');
+    calcSP(18, 'efficacy');
+}
+
+//World's most inefficient code
+function SPToggle() {
+    document.getElementById("maxHP_b").value = 50;
+    document.getElementById("attack_b").value = 50;
+    document.getElementById("atkRel_b").value = 2;
+    document.getElementById("atkCap_b").value = 2;
+    document.getElementById("defense_b").value = 50;
+    document.getElementById("defRel_b").value = 2;
+    document.getElementById("rec_b").value = 50;
+    document.getElementById("hcEff_b").value = 10;
+    document.getElementById("spark_b").value = 50;
+    document.getElementById("sparkCrits_b").value = 15;
+    document.getElementById("BB_b").value = 30;
+    document.getElementById("SBB_b").value = 30;
+    document.getElementById("BCHC_b").value = 10;
+    document.getElementById("consumption_b").value = 5;
+    document.getElementById("bcEff_b").value = 10;
+    document.getElementById("SAR_b").value = 10;
+    document.getElementById("AI_b").value = 2;
+    document.getElementById("odEff_b").value = 10;
+    calcSPAll();
 }
 
 //Code retrieved from https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
