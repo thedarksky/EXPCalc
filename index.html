@@ -6,13 +6,17 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109333610-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
         gtag('js', new Date());
 
         gtag('config', 'UA-109333610-1');
+
     </script>
 
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/mystyle.css">
     <title>Brave Frontier - Summoner's Arc Experience Calculator </title>
@@ -25,7 +29,7 @@
 
     <hr>
 
-    <div class="initial3"> 
+    <div class="initial3">
         <div class="container">
             <h2>Level</h2> Starting Level:
             <br/>
@@ -58,14 +62,12 @@
                 </select>
             </div>
 
-            <h3>Extra Stuff (check if valid)</h3>
-            
-            Number of Ellies (Requires lv95 Fire Element):
+            <h3>Extra Stuff (check if valid)</h3> Number of Ellies (Requires lv95 Fire Element):
             <br/>
             <input type="number" id="nEllie" min=0 max=4 value=0>
             <br/> Guild EXP bonus:
             <br/>
-            <input type="number" id="guildExp" min=0 max=40 value=0 step=2>
+            <input type="number" id="guildExp" min=0 max=50 value=0>
             <span>%</span>
             <br/>
             <br/>
@@ -668,6 +670,10 @@
                 </td>
             </tr>
         </table>
+        <br/>
+        <button onclick="SPToggle()">Max Desired Levels</button>
+
+        <br/>
         <br/>
 
         <select id="stage4" size=4 onchange="manual(3, 'stage4')">
