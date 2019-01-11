@@ -91,7 +91,7 @@ document.getElementById("odEff_b").innerHTML = efficacySP.innerHTML;
 
 // Initial Error Checking Function for Proper Input
 
-function errCheck(start, end, remaining, max, arr, nEllie, guildExp) {
+function errCheck(start, end, remaining, max, arr, nEllie, nKagiya, guildExp) {
     if (end - start < 0) {
         return "Starting level must be lower than desired level!";
     } else if (start < 1 || start > max || end < 1 || end > max) {
@@ -104,8 +104,12 @@ function errCheck(start, end, remaining, max, arr, nEllie, guildExp) {
         return "Remaining EXP value not valid relative to starting level!"
     } else if (nEllie > 4 || nEllie < 0) {
         return "Cannot have less than 0 Ellies or more than 4 (without removing the summoner)!"
-    } else if (guildExp > 20 || guildExp < 0) {
-        return "Guild Exp value inputted must be between 0 and 40!"
+    } else if (nKagiya > 4 || nKagiya < 0) {
+        return "Cannot have less than 0 Kagiyas or more than 4 (without removing the summoner)!"
+    } else if (nEllie + nKagiya > 4) {
+        return "Cannot have more than 4 units in a party at the same time (without removing the summoner)!"
+    } else if (guildExp > 50 || guildExp < 0) {
+        return "Guild Exp value inputted must be between 0 and 50!"
     } else {
         return "";
     }
@@ -131,6 +135,7 @@ function calcExp() {
     var remaining = Number(document.getElementById("remaining").value);
     var stage = document.getElementById("stage");
     var nEllie = Number(document.getElementById("nEllie").value);
+    var nKagiya = Number(document.getElementById("nKagiya").value);
     var guildExp = Number(document.getElementById("guildExp").value); // THIS WILL NOT BE A DECIMAL unless the html file is changed
 
     var stpSelect = "";
@@ -159,8 +164,9 @@ function calcExp() {
 
     // Initial error checking for bad inputs
     // Additional Code for Ellie and Guild
+    // Jan 11, 2019: Rewriting Code for Kagiya
 
-    result.value = errCheck(start, end, remaining, 500, expValues, nEllie, guildExp);
+    result.value = errCheck(start, end, remaining, 500, expValues, nEllie, nKagiya, guildExp);
 
     if (result.value != "") {
         return;
@@ -220,18 +226,27 @@ function calcExp() {
             expExText += "(2x EXP booster active) ";
         }
         
-        if (nEllie != 0){
-            ellieValue = (0.05 * nEllie) + 1; // 2 Ellies * 5% = 10% = 0.1 | 0.1 + 1 = 1.1 
-            expSelect *= ellieValue;
-            expExText += "(" + nEllie + " Ellie" + (nEllie > 1 ? "s" : "") + " = +" + (5 * nEllie) + "% Summoner EXP) ";
+        if (nEllie != 0 || nKagiya != 0){ // Added Kagiya to the ellie code to combine values
+            ellieValue = (0.05 * nEllie);
+            kagiyaValue = (0.08 * nKagiya);
+            expSelect *= (ellieValue + kagiyaValue + 1); // The one is to get the correct exp value in one step
+                                                         // 2 E and 2 K = 0.10 + 0.16 = 0.26, 0.26 + 1 = 1.26
+            if (nEllie > 0 && nKagiya > 0){
+                expExText += "(Total experience from Ellie and Kagiya = +" + ((5 * nEllie) + (8 * nKagiya)) + "% Summoner EXP) ";
+            } else if (nEllie > 0){
+                expExText += "(" + nEllie + " Ellie" + (nEllie > 1 ? "s" : "") + " = +" + (5 * nEllie) + "% Summoner EXP) ";
+            } else if (nKagiya > 0){
+                expExText += "(" + nKagiya + " Kagiya" + (nKagiya > 1 ? "s" : "") + " = +" + (8 * nKagiya) + "% Summoner EXP) ";
+            }
         }
         if (guildExp != 0){
-            guildExpValue = (0.01 * guildExp) + 1; // conversion to decimal to directly multiply with expSelect 
+            guildExpValue = (0.01 * guildExp) + 1; // Same as Ellie and Kagiya reason
             expSelect *= guildExpValue;
             expExText += "(+" + guildExp + "% Guild Summoner EXP bonus) ";
         }
 
-        result.value += numberWithCommas(Math.floor(expSelect)) + "\n" + expExText;
+        result.value += numberWithCommas(Math.floor(expSelect)) + "\n" + expExText; // Floor was added to avoid results with too many digits after the decimal points.
+                                                                                    // Difference should be inconsequential.
 
         var runs = Math.ceil(total / expSelect);
         var req = runs * stpSelect;
