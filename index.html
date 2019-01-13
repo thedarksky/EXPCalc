@@ -6,13 +6,17 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-109333610-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
         gtag('js', new Date());
 
         gtag('config', 'UA-109333610-1');
+
     </script>
 
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/mystyle.css">
     <title>Brave Frontier - Summoner's Arc Experience Calculator </title>
@@ -25,7 +29,7 @@
 
     <hr>
 
-    <div class="initial3"> 
+    <div class="initial3">
         <div class="container">
             <h2>Level</h2> Starting Level:
             <br/>
@@ -158,7 +162,7 @@
                     <input type="checkbox" id="halfstp2">
                 </div>
                 <div class="row">
-                    <label for="twotimesexp2">2x EXP</label>
+                    <label for="twotimesexp2">2x EXP (does not actually affect element growth)</label>
                     <input type="checkbox" id="twotimesexp2">
                 </div>
 
@@ -672,6 +676,10 @@
             </tr>
         </table>
         <br/>
+        <button onclick="SPToggle()">Max Desired Levels</button>
+
+        <br/>
+        <br/>
 
         <select id="stage4" size=4 onchange="manual(3, 'stage4')">
             <option value="level1">SP Training Lv. 1</option>
@@ -711,16 +719,15 @@
                 <label for="onepointfive4">Experience Pill / Water (1.5x EXP)</label>
                 <input type="radio" name="boosters4" id="onepointfive4">
             </div>
+            <div class="row">
+                <label for="two4">Experience Serum / Tonic (2x EXP)</label>
+                <input type="radio" name="boosters4" id="two4">
+            </div>
+            <div class="row">
+                <label for="one4">None </label>
+                <input type="radio" name="boosters4" id="one4" checked>
+            </div>
         </div>
-        <div class="row">
-            <label for="two4">Experience Serum / Tonic (2x EXP)</label>
-            <input type="radio" name="boosters4" id="two4">
-        </div>
-        <div class="row">
-            <label for="one4">None </label>
-            <input type="radio" name="boosters4" id="one4" checked>
-        </div>
-
         <br/>
 
         <button onclick="calcSP(16, 'SAR')">Calculate</button>
@@ -731,7 +738,7 @@
 
         <hr>
 
-        <p>Created by Altivu</p>
+        <p>Created by Altivu (with contributions from thedarksky)</p>
 
         <p>Most values retrieved from the <a href="http://bravefrontierglobal.wikia.com/wiki/Summoners%27_Training_Camp">Brave Frontier Wiki Page.</a></p>
     </div>

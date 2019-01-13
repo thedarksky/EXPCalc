@@ -377,7 +377,6 @@ function calcEle() {
             expExText += "(2x EXP booster active)";
         }
 
-
         result.value += numberWithCommas(expSelect) + "\n" + expExText;
 
         var runs = Math.ceil(total / expSelect);
@@ -622,6 +621,51 @@ function calcSP(row, type) {
     } catch (err) {
         result.value = err.message;
     }
+}
+
+//World's most inefficient code
+function calcSPAll() {
+    calcSP(1, 'stats');
+    calcSP(2, 'stats');
+    calcSP(3, 'relative');
+    calcSP(4, 'limitBreak');
+    calcSP(5, 'stats');
+    calcSP(6, 'relative');
+    calcSP(7, 'stats');
+    calcSP(8, 'efficacy');
+    calcSP(9, 'stats');
+    calcSP(10, 'sparkCrits');
+    calcSP(11, 'BB');
+    calcSP(12, 'BB');
+    calcSP(13, 'BCHC');
+    calcSP(14, 'consumption');
+    calcSP(15, 'efficacy');
+    calcSP(16, 'SAR');
+    calcSP(17, 'AI');
+    calcSP(18, 'efficacy');
+}
+
+//World's most inefficient code
+function SPToggle() {
+    document.getElementById("maxHP_b").value = 50;
+    document.getElementById("attack_b").value = 50;
+    document.getElementById("atkRel_b").value = 2;
+    document.getElementById("atkCap_b").value = 2;
+    document.getElementById("defense_b").value = 50;
+    document.getElementById("defRel_b").value = 2;
+    document.getElementById("rec_b").value = 50;
+    document.getElementById("hcEff_b").value = 10;
+    document.getElementById("spark_b").value = 50;
+    document.getElementById("sparkCrits_b").value = 15;
+    document.getElementById("BB_b").value = 30;
+    document.getElementById("SBB_b").value = 30;
+    document.getElementById("BCHC_b").value = 10;
+    document.getElementById("consumption_b").value = 5;
+    document.getElementById("bcEff_b").value = 10;
+    document.getElementById("SAR_b").value = 10;
+    document.getElementById("AI_b").value = 2;
+    document.getElementById("odEff_b").value = 10;
+    calcSPAll();
 }
 
 //Code retrieved from https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
